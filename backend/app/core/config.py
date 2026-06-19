@@ -24,8 +24,34 @@ class Settings(BaseSettings):
                 url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
             elif url.startswith("postgres://"):
                 url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+            
+            # Clean off sslmode query parameter if present since asyncpg does not support it.
+            if "sslmode" in url:
+                from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse
+                parsed = urlparse(url)
+                query_params = dict(parse_qsl(parsed.query))
+                if "sslmode" in query_params:
+                    del query_params["sslmode"]
+                new_query = urlencode(query_params)
+                url = urlunparse((
+                    parsed.scheme,
+                    parsed.netloc,
+                    parsed.path,
+                    parsed.params,
+                    new_query,
+                    parsed.fragment
+                ))
             return url
         return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+
+    @property
+    def is_db_ssl_required(self) -> bool:
+        if self.DATABASE_URL:
+            if "sslmode" in self.DATABASE_URL:
+                return True
+            if "neon.tech" in self.DATABASE_URL:
+                return True
+        return False
 
     class Config:
         import os

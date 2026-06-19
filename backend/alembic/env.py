@@ -62,10 +62,15 @@ async def run_migrations_online() -> None:
     configuration = config.get_section(config.config_ini_section, {})
     configuration["sqlalchemy.url"] = settings.async_database_url
     
+    connect_args = {}
+    if settings.is_db_ssl_required:
+        connect_args["ssl"] = True
+
     connectable = async_engine_from_config(
         configuration,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
+        connect_args=connect_args,
     )
 
     async with connectable.connect() as connection:
