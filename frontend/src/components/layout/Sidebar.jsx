@@ -36,7 +36,7 @@ export default function Sidebar() {
         </li>
       </ul>
       <div style={{ marginTop: 'auto', padding: '0.5rem', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-        v1.0.0 Routed Dev Mode
+        Inventory Management Platform
       </div>
     </nav>
   );
