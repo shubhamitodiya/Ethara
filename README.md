@@ -5,7 +5,7 @@
 [![PostgreSQL Database](https://img.shields.io/badge/Database-PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org)
 [![Docker Orchestration](https://img.shields.io/badge/Container-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
 
-Ethara is a full-stack **Inventory & Order Management System** designed to help users track products, manage customer accounts, and process sales orders. It includes an asynchronous Python backend API (FastAPI), a relational database (PostgreSQL) for reliable storage, and a responsive web dashboard (React) for administration tasks.
+This is a full-stack **Inventory & Order Management System** designed to help users track products, manage customer accounts, and process sales orders. It includes an asynchronous Python backend API (FastAPI), a relational database (PostgreSQL) for reliable storage, and a responsive web dashboard (React) for administration tasks.
 
 ---
 
